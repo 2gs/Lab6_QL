@@ -8,74 +8,100 @@ namespace LabNumber6
 {
     class Program
     {
-        static void Main(string[] args)
 
-            
+        public static string takeWord(string word)      //Translate word in to pig latin
         {
-            string word;
-            string sub1;
             string way = "way";
-           // string[] word1;
-            int wordCount = 0;
-           char [] consonants = {'B','C','D', 'F', 'G','H','J', 'K', 'L', 'M','N','P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W','Y','X','Z' };
-            //word1 = new string[word.Length];
 
-            Console.WriteLine("Enter in a word so that I may translate from Pig Latin ==> to English");
-            word = Console.ReadLine().ToLower();
-          //  wordCount = word.Length;
-            
-           // word1 = new string[wordCount];
-            
-          //  for (int i = 0; i < word.Length; i++)
+            if (word[0] == 'a' || word[0] == 'e' || word[0] == 'i' || word[0] == 'o' || word[0] == 'u')
             {
-                if (word[0] == 'a' || word[0] == 'e' || word[0] == 'i' || word[0] == 'o' || word[0] == 'u')
-                {
-                    word += way;
+                word += way;
 
-                    Console.WriteLine(word);
-                    Console.WriteLine("Do you want to translate another word? Y or No");
-                }
+                Console.WriteLine(word);
 
-
-                //else if ( word[0] == consonants[0] || word[0] == consonants[1] || word[0] == consonants[2] || word[0] == consonants[3] ||
-                //    word[0] == consonants[4] || word[0] == consonants[5] || word[0] == consonants[6] || word[0] == consonants[7] || word[0] == consonants[8]
-                //    || word[0] == consonants[9] || word[0] == consonants[10] || word[0] == consonants[11] || word[0] == consonants[12] 
-                //    || word[0] == consonants[13] || word[0] == consonants[14] ||word[0] == consonants[15] || word[0] == consonants[16]
-                //    || word[0] == consonants[17] || word[0] == consonants[18] || word[0] == consonants[19] || word[0] == consonants[20] )
-                //{
-
-                //}
-                else
-                {
-                    char[] vowels = {'a','e', 'i', 'o', 'u' };
-                    int index = word.IndexOfAny(vowels);                    //Grabs the vowel and whatever is after it
-                   Console.WriteLine(word.Substring(index) + word.Substring(0,index));      //subString(0,index) grabs the beginning of the word all the way up too the vowel
-                    
-
-
-                }
-                //for (int i = 0; i < word.Length; i++)
-                //{
-                //    if (word[0] == consonants[0] || word[0] == consonants[1] || word[0] == consonants[2] || word[0] == consonants[3] ||
-                //  word[0] == consonants[4] || word[0] == consonants[5] || word[0] == consonants[6] || word[0] == consonants[7] || word[0] == consonants[8]
-                //   || word[0] == consonants[9] || word[0] == consonants[10] || word[0] == consonants[11] || word[0] == consonants[12] 
-                //   || word[0] == consonants[13] || word[0] == consonants[14] ||word[0] == consonants[15] || word[0] == consonants[16]
-                //    || word[0] == consonants[17] || word[0] == consonants[18] || word[0] == consonants[19] || word[0] == consonants[20])
-                //    {
-                //        while(word.Length > 0)
-                //        {
-                //            word.IndexOfAny(consonants, 0, word.Length);
-
-                //        }
-                       
-                //    }
-                //}
+                return word;
+                validate(word);
             }
-            //if (word.IndexOf(word) == '' )
-            //{
+            else
+            {
+               // string display = "";
+                char[] vowels = { 'a', 'e', 'i', 'o', 'u' };
+                int index = word.IndexOfAny(vowels);                    //Grabs the vowel and whatever is after it
+                Console.WriteLine(word.Substring(index) + word.Substring(0, index));
+                return word ;
+                validate(word);
+            }
+        }
+         public static void validate(string word)
+        {
+            bool cont = true;
+            string choice = "";
+            Console.WriteLine("Do you want to translate another word? Y or N");
 
-            //}
+            choice = Console.ReadLine().ToUpper();
+            if (choice == "Y")
+            {
+                return;
+            }
+            else if (choice == "N")
+            {
+                Console.WriteLine("Goodbye");
+                System.Environment.Exit(1);
+            }
+            else if (choice != "Y" || choice != "N")
+            {
+              
+                do                                          //If user puts anything else besides Y or N ask for correct input
+                {
+                    Console.WriteLine("You didnt put a valid answer, please enter right answer, Y or N");
+                    choice = Console.ReadLine().ToUpper();
+                    if (choice == "Y")
+                    {
+                        break;
+                        
+                    }
+                    else if (choice == "N")
+                    {
+                        Console.WriteLine("Good bye..");
+                        System.Environment.Exit(1); //Exit program
+                        break;
+                    }
+
+                } while (choice != "Y" || choice !="N");
+               
+               
+            }
 
         }
+
+
+        static void Main(string[] args)
+        {
+            string word = "";
+            string way = "way";
+            string choice;
+            bool cont = true;
+
+           char [] consonants = {'B','C','D', 'F', 'G','H','J', 'K', 'L', 'M','N','P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W','Y','X','Z' };
+        
+            while (cont)
+            {
+                Console.WriteLine("Enter in a word so that I may translate from Pig Latin ==> to English");
+                word = Console.ReadLine().ToLower();
+
+                takeWord(word);
+                validate(word);
+
+
+            }
+
+        }
+
     }
+
+
 }
+                
+
+           
+   
